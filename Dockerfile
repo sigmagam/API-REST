@@ -1,12 +1,20 @@
+# Gunakan versi terbaru LTS (saat ini Node.js 20.x)
+FROM node:20
 
-FROM node:16.15.0
-FROM node:18.2.0
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install nodejs -y
+# Update dan upgrade dependencies OS (opsional tapi bersih)
+RUN apt-get update && apt-get upgrade -y
 
+# Set working directory
 WORKDIR /app
-COPY . /app
+
+# Salin semua file ke container
+COPY . .
+
+# Install dependencies
 RUN npm install
+
+# Jalankan aplikasi
 CMD ["node", "index.js"]
+
+# Port yang digunakan aplikasi
 EXPOSE 6892
